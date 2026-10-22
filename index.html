@@ -13,21 +13,23 @@
 
   <style>
     /* ============================================================
-       1. TOKENS
+       1. TOKENS  ·  Nueva paleta
        ============================================================ */
     :root {
-      --bg:          #f2f3f7;
+      --bg:          #E3E3E3;   /* base */
       --card:        #ffffff;
-      --ink:         #0d1017;
-      --muted:       #6c7484;
-      --line:        rgba(15, 20, 32, .06);
-      --line-hover:  rgba(15, 20, 32, .10);
+      --ink:         #0A29B6;   /* títulos */
+      --accent:      #EA2820;   /* botones + subtítulos */
+      --accent-dark: #c31e17;
+      --muted:       #5f6470;   /* párrafos */
+
+      --line:        rgba(10, 41, 182, .09);
+      --line-hover:  rgba(10, 41, 182, .20);
 
       --radius:      28px;
-      --radius-md:   16px;
 
-      --shadow-1: 0 1px 2px rgba(13,16,23,.04), 0 6px 20px -6px rgba(13,16,23,.08);
-      --shadow-2: 0 2px 6px rgba(13,16,23,.05), 0 26px 46px -14px rgba(13,16,23,.22);
+      --shadow-1: 0 1px 2px rgba(10,41,182,.05), 0 6px 20px -6px rgba(10,41,182,.13);
+      --shadow-2: 0 2px 6px rgba(10,41,182,.08), 0 26px 46px -14px rgba(10,41,182,.30);
 
       --ease: cubic-bezier(.22, .85, .28, 1);
     }
@@ -49,8 +51,8 @@
 
       background-color: var(--bg);
       background-image:
-        radial-gradient(820px 460px at 10% -12%, rgba(99, 102, 241, .16), transparent 62%),
-        radial-gradient(760px 420px at 98% 2%,  rgba(236, 72, 153, .13), transparent 58%);
+        radial-gradient(820px 460px at 10% -12%, rgba(10, 41, 182, .16), transparent 62%),
+        radial-gradient(760px 420px at 98% 2%,  rgba(234, 40, 32, .14), transparent 58%);
       background-attachment: fixed;
 
       -webkit-font-smoothing: antialiased;
@@ -92,7 +94,6 @@
         border-color .42s var(--ease);
     }
 
-    /* Elevación al hover (solo en dispositivos con puntero real) */
     @media (hover: hover) {
       .card:hover {
         transform: translateY(-6px);
@@ -108,49 +109,53 @@
       grid-column: span 2;
       grid-row: span 2;
       justify-content: center;
-      gap: 16px;
-      background: linear-gradient(155deg, #ffffff 0%, #fdfdff 58%, #f7f8ff 100%);
+      gap: 14px;
+      background: linear-gradient(155deg, #ffffff 0%, #fdfdff 55%, #f3f6ff 100%);
     }
 
+    /* --- Badge / botón de estado --- */
     .eyebrow {
       align-self: flex-start;
       display: inline-flex;
       align-items: center;
       gap: 8px;
 
-      padding: 6px 13px 6px 11px;
+      padding: 7px 14px 7px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(99, 102, 241, .18);
-      background: rgba(99, 102, 241, .08);
+      border: 1px solid var(--accent);
+      background: var(--accent);
 
       font-size: 12.5px;
       font-weight: 600;
       letter-spacing: .01em;
-      color: #4f46e5;
+      color: #ffffff;
     }
 
     .dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #22c55e;
+      background: #ffffff;
       animation: pulse 2.4s ease-out infinite;
     }
 
     @keyframes pulse {
-      0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, .55); }
-      70%  { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, .70); }
+      70%  { box-shadow: 0 0 0 7px rgba(255, 255, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
     }
 
+    /* --- Título principal --- */
     .hero__title {
       margin: 0;
       font-size: clamp(1.9rem, 2.6vw + 1rem, 2.65rem);
       font-weight: 800;
       line-height: 1.04;
       letter-spacing: -.035em;
+      color: var(--ink);
     }
 
+    /* --- Bio --- */
     .hero__bio {
       margin: 0;
       max-width: 44ch;
@@ -159,6 +164,7 @@
       color: var(--muted);
     }
 
+    /* --- Chips de skills --- */
     .chips {
       display: flex;
       flex-wrap: wrap;
@@ -169,13 +175,52 @@
     .chip {
       padding: 6px 12px;
       border-radius: 999px;
-      border: 1px solid var(--line);
-      background: #f3f4f8;
+      border: 1px solid rgba(10, 41, 182, .16);
+      background: rgba(10, 41, 182, .06);
 
       font-size: 12.5px;
       font-weight: 600;
-      color: #3f4654;
+      color: var(--ink);
       white-space: nowrap;
+    }
+
+    /* --- Botón CTA --- */
+    .btn {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 6px;
+      padding: 12px 22px;
+      border-radius: 999px;
+
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      text-decoration: none;
+
+      box-shadow: 0 10px 22px -10px rgba(234, 40, 32, .80);
+      transition:
+        transform .32s var(--ease),
+        background .32s var(--ease),
+        box-shadow .32s var(--ease);
+    }
+
+    .btn svg { width: 15px; height: 15px; }
+
+    @media (hover: hover) {
+      .btn:hover {
+        background: var(--accent-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 15px 28px -10px rgba(234, 40, 32, .90);
+      }
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 3px;
     }
 
     /* ============================================================
@@ -187,7 +232,7 @@
       justify-content: center;
       gap: 18px;
       text-align: center;
-      background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #f3f7ff 100%);
     }
 
     .avatar {
@@ -196,7 +241,7 @@
       border-radius: 50%;
       overflow: hidden;
       flex-shrink: 0;
-      box-shadow: 0 14px 30px -14px rgba(79, 70, 229, .55);
+      box-shadow: 0 16px 32px -14px rgba(10, 41, 182, .55);
     }
 
     .avatar svg { display: block; width: 100%; height: 100%; }
@@ -205,7 +250,7 @@
       margin: 0;
       font-size: 13px;
       font-weight: 600;
-      color: var(--muted);
+      color: var(--accent);          /* subtítulo */
       letter-spacing: .01em;
     }
 
@@ -222,7 +267,7 @@
     }
 
     .card--social:focus-visible {
-      outline: 2px solid #6366f1;
+      outline: 2px solid var(--accent);
       outline-offset: 3px;
     }
 
@@ -232,15 +277,15 @@
       right: 22px;
       display: grid;
       place-items: center;
-      color: #9aa1b0;
-      opacity: .45;
+      color: rgba(10, 41, 182, .45);
+      opacity: .55;
       transition: opacity .35s var(--ease), transform .35s var(--ease), color .35s var(--ease);
     }
 
     @media (hover: hover) {
       .card--social:hover .card__arrow {
         opacity: 1;
-        color: var(--ink);
+        color: var(--accent);
         transform: translate(2px, -2px);
       }
       .card--social:hover .icon {
@@ -261,11 +306,11 @@
 
     .icon svg { display: block; width: 24px; height: 24px; }
 
-    .icon--behance   { background: rgba(23, 105, 255, .10); color: #1769ff; }
-    .icon--instagram { background: linear-gradient(135deg, rgba(253, 186, 116, .26), rgba(236, 72, 153, .24)); color: #d62976; }
-    .icon--tiktok    { background: rgba(13, 16, 23, .07);   color: #0d1017; }
-    .icon--linkedin  { background: rgba(10, 102, 194, .10); color: #0a66c2; }
-    .icon--hobby     { background: rgba(99, 102, 241, .10); color: #4f46e5; }
+    .icon--behance   { background: rgba(10, 41, 182, .10); color: #0A29B6; }
+    .icon--instagram { background: rgba(234, 40, 32, .10); color: #EA2820; }
+    .icon--tiktok    { background: rgba(10, 41, 182, .10); color: #0A29B6; }
+    .icon--linkedin  { background: rgba(10, 41, 182, .10); color: #0A29B6; }
+    .icon--hobby     { background: rgba(234, 40, 32, .10); color: #EA2820; }
 
     .social__meta {
       display: flex;
@@ -276,14 +321,15 @@
 
     .social__name {
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -.012em;
+      color: var(--ink);             /* título */
     }
 
     .social__handle {
       font-size: 12.5px;
-      font-weight: 500;
-      color: var(--muted);
+      font-weight: 600;
+      color: var(--accent);          /* subtítulo */
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -312,6 +358,7 @@
       font-size: 16px;
       font-weight: 700;
       letter-spacing: -.015em;
+      color: var(--ink);             /* título */
     }
 
     .hobby__text {
@@ -336,7 +383,7 @@
       .card--hero {
         grid-column: 1 / -1;
         grid-row: auto;
-        min-height: 260px;
+        min-height: 280px;
       }
 
       .card--avatar {
@@ -370,7 +417,6 @@
       .card--hero,
       .card--avatar { min-height: 0; }
 
-      /* Redes en formato fila horizontal */
       .card--social {
         flex-direction: row;
         align-items: center;
@@ -401,7 +447,8 @@
         animation-iteration-count: 1 !important;
         transition-duration: .001ms !important;
       }
-      .card:hover { transform: none; }
+      .card:hover,
+      .btn:hover { transform: none; }
     }
   </style>
 </head>
@@ -427,6 +474,14 @@
         <span class="chip">Motion</span>
         <span class="chip">Design Systems</span>
       </div>
+
+      <a class="btn" href="mailto:hola@luciafernandez.dev">
+        Hablemos
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14" /><path d="m13 6 6 6-6 6" />
+        </svg>
+      </a>
     </section>
 
     <!-- ==================== 2 · AVATAR ==================== -->
@@ -435,9 +490,9 @@
         <svg viewBox="0 0 200 200" role="img" aria-label="Avatar de Lucía Fernández">
           <defs>
             <linearGradient id="av-bg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%"   stop-color="#c7d2fe" />
-              <stop offset="55%"  stop-color="#a5b4fc" />
-              <stop offset="100%" stop-color="#f0abfc" />
+              <stop offset="0%"   stop-color="#c9d6ff" />
+              <stop offset="55%"  stop-color="#9fb4f2" />
+              <stop offset="100%" stop-color="#f4b4b0" />
             </linearGradient>
             <linearGradient id="av-fg" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%"   stop-color="#ffffff" />
